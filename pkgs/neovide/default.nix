@@ -2,7 +2,7 @@
 , neovide
 }:
 
-if stdenv.isDarwin
+if stdenv.hostPlatform.isDarwin
 then
   neovide.overrideAttrs
     (prev: {

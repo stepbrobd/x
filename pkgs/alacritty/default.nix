@@ -2,7 +2,7 @@
 , alacritty
 }:
 
-if stdenv.isDarwin
+if stdenv.hostPlatform.isDarwin
 then
   alacritty.overrideAttrs
     (prev: {

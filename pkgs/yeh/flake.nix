@@ -20,7 +20,7 @@
                 mirage-crypto-rng = prev'.mirage-crypto-rng.overrideAttrs (_: {
                   # https://github.com/mirage/mirage-crypto/issues/216
                   # https://github.com/nixos/nixpkgs/pull/356634
-                  doCheck = !(with final.stdenv; isDarwin && isAarch64);
+                  doCheck = !(with final.stdenv.hostPlatform; isDarwin && isAarch64);
                 });
               });
             })

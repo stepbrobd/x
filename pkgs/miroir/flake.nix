@@ -19,7 +19,7 @@
                   dune = ocamlPrev.dune_3;
                   # https://github.com/nixos/nixpkgs/pull/356634
                   mirage-crypto-rng = ocamlPrev.mirage-crypto-rng.overrideAttrs {
-                    doCheck = !(with final.stdenv; isDarwin && isAarch64);
+                    doCheck = !(with final.stdenv.hostPlatform; isDarwin && isAarch64);
                   };
                   # https://github.com/oxcaml/oxcaml
                   oxcaml = inputs'.oxcaml.packages.oxcaml.overrideAttrs {

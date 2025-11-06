@@ -59,11 +59,11 @@ in
       };
     }
 
-    (mkIf pkgs.stdenv.isLinux (optionalAttrs (options?programs.ssh.extraConfig) {
+    (mkIf pkgs.stdenv.hostPlatform.isLinux (optionalAttrs (options?programs.ssh.extraConfig) {
       programs.ssh.extraConfig = nixbuildSSH;
     }))
 
-    (mkIf pkgs.stdenv.isDarwin {
+    (mkIf pkgs.stdenv.hostPlatform.isDarwin {
       environment.etc."ssh/ssh_config.d/nixbuild".text = nixbuildSSH;
     })
 
