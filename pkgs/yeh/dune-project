@@ -1,0 +1,26 @@
+(lang dune 3.20)
+(generate_opam_files true)
+
+(name yeh)
+(version 2025.1106.0)
+(source (github stepbrobd/yeh))
+(license MIT)
+(authors "Yifei Sun <ysun@hey.com>")
+(maintainers "Yifei Sun <ysun@hey.com>")
+
+(package
+ (name yeh)
+ (synopsis "YEH <-> HEY")
+ (description "IMAP and SMTP proxy for HEY")
+ (depends
+   ocaml
+   angstrom
+   cohttp
+   cohttp-lwt
+   cohttp-lwt-unix
+   core
+   lambdasoup
+   lwt
+   mrmime
+   ptime
+   uri))

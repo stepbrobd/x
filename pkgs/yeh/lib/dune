@@ -1,0 +1,15 @@
+(library
+ (name yeh)
+ (modules config hey imap protocol smtp)
+ (libraries
+  angstrom
+  cohttp
+  cohttp-lwt
+  cohttp-lwt-unix
+  core
+  lambdasoup
+  lwt
+  lwt.unix
+  mrmime
+  ptime
+  uri))
