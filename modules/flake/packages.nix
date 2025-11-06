@@ -1,11 +1,11 @@
 { inputs, lib, ... }:
 
 let
-  inherit (lib) importPackagesWith mkDynamicAttrs;
+  inherit (lib) fix importPackagesWith mkDynamicAttrs;
 in
 {
   perSystem = { pkgs, ... }: {
-    packages = mkDynamicAttrs (lib.fix (self: {
+    packages = mkDynamicAttrs (fix (self: {
       dir = ../../pkgs;
       fun = name: importPackagesWith (pkgs // { inherit inputs lib; }) (self.dir + "/${name}") { };
     }));
