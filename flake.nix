@@ -27,6 +27,7 @@
               allowUnfree = true;
             };
             overlays = with inputs; [
+              self.overlays.default
               golink.overlays.default
               rust-overlay.overlays.default
               unstraightened.overlays.default
