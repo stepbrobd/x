@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 
 let
-  inherit (lib) fix importPackagesWith mkDynamicAttrs;
+  inherit (lib) deepMergeAttrsList fix importPackagesWith mkDynamicAttrs;
 in
 {
   perSystem = { pkgs, ... }: {
@@ -13,5 +13,8 @@ in
 
   # seems like `legacyPackages` is equivalent to `packages`?
   # https://nixos.wiki/wiki/Flakes#Output_schema
-  flake.legacyPackages = inputs.self.packages;
+  flake.legacyPackages = deepMergeAttrsList [
+    inputs.nixpkgs.legacyPackages
+    inputs.self.packages
+  ];
 }
