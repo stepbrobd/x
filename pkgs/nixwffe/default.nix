@@ -1,7 +1,5 @@
 { nixVersions }:
 
-nixVersions.latest.overrideAttrs (prev: {
-  patches = prev.patches or [ ] ++ [
-    ./0001-nix-with-full-flake-expr.patch
-  ];
-})
+nixVersions.latest.appendPatches [
+  ./0001-nix-with-full-flake-expr.patch
+]
