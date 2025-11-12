@@ -1,7 +1,7 @@
-diff --git i/flake.cc w/flake.cc
+diff --git i/src/libflake/flake.cc w/src/libflake/flake.cc
 index 486118963..10583e909 100644
---- i/flake.cc
-+++ w/flake.cc
+--- i/src/libflake/flake.cc
++++ w/src/libflake/flake.cc
 @@ -24,15 +24,14 @@ using namespace flake;
  
  namespace flake {
