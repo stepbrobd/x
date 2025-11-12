@@ -1,7 +1,7 @@
 { nixVersions }:
 
-nixVersions.git.overrideAttrs (prev: {
+nixVersions.latest.overrideAttrs (prev: {
   patches = prev.patches or [ ] ++ [
-    # ./0001-nix-with-full-flake-expr.patch
+    ./0001-nix-with-full-flake-expr.patch
   ];
 })

@@ -1,8 +1,8 @@
 diff --git i/src/libflake/flake.cc w/src/libflake/flake.cc
-index dc60dbf08..230245b6b 100644
+index 486118963..10583e909 100644
 --- i/src/libflake/flake.cc
 +++ w/src/libflake/flake.cc
-@@ -69,15 +69,14 @@ using namespace flake;
+@@ -24,15 +24,14 @@ using namespace flake;
  
  namespace flake {
  
@@ -21,17 +21,16 @@ index dc60dbf08..230245b6b 100644
      if (value.type() != type)
          throw Error("expected %s but got %s at %s", showType(type), showType(value.type()), state.positions[pos]);
  }
-@@ -92,7 +91,8 @@ static std::pair<std::map<FlakeId, FlakeInput>, fetchers::Attrs> parseFlakeInput
+@@ -47,6 +46,8 @@ static std::pair<std::map<FlakeId, FlakeInput>, fetchers::Attrs> parseFlakeInput
  
  static void parseFlakeInputAttr(EvalState & state, const Attr & attr, fetchers::Attrs & attrs)
  {
--// Allow selecting a subset of enum values
 +    state.forceValue(*attr.value, attr.pos);
 +
+ // Allow selecting a subset of enum values
  #pragma GCC diagnostic push
  #pragma GCC diagnostic ignored "-Wswitch-enum"
-     switch (attr.value->type()) {
-@@ -151,7 +151,7 @@ static FlakeInput parseFlakeInput(
+@@ -106,7 +107,7 @@ static FlakeInput parseFlakeInput(
      for (auto & attr : *value->attrs()) {
          try {
              if (attr.name == sUrl) {
@@ -40,7 +39,7 @@ index dc60dbf08..230245b6b 100644
                  if (attr.value->type() == nString)
                      url = attr.value->string_view();
                  else if (attr.value->type() == nPath) {
-@@ -251,9 +251,14 @@ static Flake readFlake(
+@@ -206,9 +207,14 @@ static Flake readFlake(
      auto flakeDir = rootDir / CanonPath(resolvedRef.subdir);
      auto flakePath = flakeDir / "flake.nix";
  
@@ -57,7 +56,7 @@ index dc60dbf08..230245b6b 100644
  
      Flake flake{
          .originalRef = originalRef,
-@@ -270,6 +275,7 @@ static Flake readFlake(
+@@ -225,6 +231,7 @@ static Flake readFlake(
      auto sInputs = state.symbols.create("inputs");
  
      if (auto inputs = vInfo.attrs()->get(sInputs)) {
@@ -65,15 +64,15 @@ index dc60dbf08..230245b6b 100644
          auto [flakeInputs, selfAttrs] =
              parseFlakeInputs(state, inputs->value, inputs->pos, lockRootAttrPath, flakeDir, true);
          flake.inputs = std::move(flakeInputs);
-@@ -279,6 +285,7 @@ static Flake readFlake(
+@@ -234,6 +241,7 @@ static Flake readFlake(
      auto sOutputs = state.symbols.create("outputs");
  
      if (auto outputs = vInfo.attrs()->get(sOutputs)) {
 +        state.forceValue(*outputs->value, outputs->pos);
          expectType(state, nFunction, *outputs->value, outputs->pos);
  
-         if (outputs->value->isLambda()) {
-@@ -299,10 +306,11 @@ static Flake readFlake(
+         if (outputs->value->isLambda() && outputs->value->lambda().fun->hasFormals()) {
+@@ -251,10 +259,11 @@ static Flake readFlake(
      auto sNixConfig = state.symbols.create("nixConfig");
  
      if (auto nixConfig = vInfo.attrs()->get(sNixConfig)) {
@@ -82,7 +81,7 @@ index dc60dbf08..230245b6b 100644
  
          for (auto & setting : *nixConfig->value->attrs()) {
 -            forceTrivialValue(state, *setting.value, setting.pos);
-+            state.forceValue(*setting.value, setting.pos);
++            forceValueDeep(state, *setting.value, setting.pos);
              if (setting.value->type() == nString)
                  flake.config.settings.emplace(
                      state.symbols[setting.name], std::string(state.forceStringNoCtx(*setting.value, setting.pos, "")));
