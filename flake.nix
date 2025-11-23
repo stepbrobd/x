@@ -133,7 +133,7 @@
     parts.url = "github:hercules-ci/flake-parts";
     parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     # r
-    rpi.url = "github:nvmd/nixos-raspberrypi?ref=pull/104/merge";
+    rpi.url = "github:nvmd/nixos-raspberrypi";
     rpi.inputs.nixpkgs.follows = "nixpkgs";
     rpi.inputs.flake-compat.follows = "compat";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -170,16 +170,5 @@
     unstraightened.inputs.systems.follows = "systems";
     utils.url = "github:numtide/flake-utils";
     utils.inputs.systems.follows = "systems";
-  };
-
-  nixConfig = {
-    extra-substituters = [
-      "https://cache.garnix.io"
-      "https://colmena.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
-    ];
   };
 }
