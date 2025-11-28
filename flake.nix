@@ -98,9 +98,6 @@
     golink.url = "github:tailscale/golink";
     golink.inputs.nixpkgs.follows = "nixpkgs";
     golink.inputs.systems.follows = "systems";
-    gomod2nix.url = "github:nix-community/gomod2nix";
-    gomod2nix.inputs.nixpkgs.follows = "nixpkgs";
-    gomod2nix.inputs.flake-utils.follows = "utils";
     # h
     hardware.url = "github:nixos/nixos-hardware";
     hm.url = "github:nix-community/home-manager";
@@ -151,10 +148,6 @@
     sweep.inputs.crane.follows = "crane";
     systems.url = "github:nix-systems/default";
     # t
-    # tangled.url = "git+https://tangled.sh/@tangled.sh/core";
-    # tangled.inputs.nixpkgs.follows = "nixpkgs";
-    # tangled.inputs.gitignore.follows = "gitignore";
-    # tangled.inputs.gomod2nix.follows = "gomod2nix";
     terranix.url = "github:terranix/terranix";
     terranix.inputs.nixpkgs.follows = "nixpkgs";
     terranix.inputs.flake-parts.follows = "parts";
