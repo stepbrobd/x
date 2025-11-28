@@ -29,7 +29,7 @@
           git
           nix-direnv
         ] ++ (with ocamlPackages; [
-          dune_3
+          dune
           ocaml
           ocamlformat
           ocaml-print-intf
@@ -39,17 +39,18 @@
 
       formatter = pkgs.writeShellScriptBin "formatter" ''
         ${lib.getExe pkgs.deno} fmt .
-        ${lib.getExe pkgs.dune_3} fmt
         ${lib.getExe pkgs.nixpkgs-fmt} .
+        ${lib.getExe pkgs.ocamlPackages.dune} fmt
       '';
 
-      packages = {
+      packages = lib.fix (self: {
+        default = self.cohttp-eio;
         cohttp = pkgs.ocamlPackages.cohttp;
         cohttp-eio = pkgs.ocamlPackages.cohttp-eio;
         http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
-      };
+      });
     };
   };
 
