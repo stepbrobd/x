@@ -44,6 +44,9 @@
       '';
 
       packages = {
+        cohttp = pkgs.ocamlPackages.cohttp;
+        cohttp-eio = pkgs.ocamlPackages.cohttp-eio;
+        http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
       };
