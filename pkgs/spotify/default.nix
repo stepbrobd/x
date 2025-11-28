@@ -2,7 +2,8 @@
 , spotify
 }:
 
-if stdenv.hostPlatform.isDarwin then
+if stdenv.hostPlatform.isDarwin
+then
   spotify.overrideAttrs
   {
     postInstall = ''
@@ -10,5 +11,4 @@ if stdenv.hostPlatform.isDarwin then
       cp ${./icon.icns} $out/Applications/Spotify.app/Contents/Resources/Icon.icns
     '';
   }
-else
-  spotify
+else spotify
