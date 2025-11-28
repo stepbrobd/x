@@ -33,6 +33,7 @@
           ocaml
           ocamlformat
           ocaml-print-intf
+          yocaml
         ]);
       };
 
@@ -41,6 +42,11 @@
         ${lib.getExe pkgs.dune_3} fmt
         ${lib.getExe pkgs.nixpkgs-fmt} .
       '';
+
+      packages = {
+        yocaml = pkgs.ocamlPackages.yocaml;
+        yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
+      };
     };
   };
 

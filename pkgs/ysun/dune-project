@@ -1,0 +1,9 @@
+(lang dune 3.20)
+(generate_opam_files false)
+
+(name ysun)
+(version 2025.1128.0)
+(source (uri https://github.com/stepbrobd/x/tree/master/pkgs/ysun))
+(license CC-BY-NC-4.0)
+(authors "Yifei Sun <ysun@hey.com>")
+(maintainers "Yifei Sun <ysun@hey.com>")
