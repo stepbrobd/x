@@ -61,6 +61,7 @@
           liquid_parser
           liquid_std
           liquid_syntax
+          omd
           oniguruma
           plist-xml
           textmate-language
