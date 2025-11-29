@@ -77,6 +77,8 @@
           yocaml_otoml
           yocaml_runtime
           yocaml_syndication
+          yocaml_unix
+          yocaml_yaml
           ;
       });
     };
