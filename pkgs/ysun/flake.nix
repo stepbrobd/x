@@ -50,6 +50,7 @@
         http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
+        yocaml_runtime = pkgs.ocamlPackages.yocaml_runtime;
       });
     };
   };
