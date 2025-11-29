@@ -52,12 +52,13 @@
           carton-lwt
           cohttp
           cohttp-eio
-          textmate-language
           git-kv
           git-net
+          hilite
           http
           oniguruma
           plist-xml
+          textmate-language
           yocaml
           yocaml_cmarkit
           yocaml_eio
