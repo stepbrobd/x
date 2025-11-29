@@ -6,7 +6,7 @@
 , yocaml
 }:
 
-buildDunePackage (finalAttrs: {
+buildDunePackage {
   pname = "yocaml_cmarkit";
 
   inherit (yocaml) version src;
@@ -28,4 +28,4 @@ buildDunePackage (finalAttrs: {
     (mdx.override { inherit logs; })
     ppx_expect
   ];
-})
+}
