@@ -56,6 +56,11 @@
           git-net
           hilite
           http
+          liquid_interpreter
+          liquid_ml
+          liquid_parser
+          liquid_std
+          liquid_syntax
           oniguruma
           plist-xml
           textmate-language
