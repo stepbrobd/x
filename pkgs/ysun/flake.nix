@@ -51,6 +51,7 @@
         cohttp = pkgs.ocamlPackages.cohttp;
         cohttp-eio = pkgs.ocamlPackages.cohttp-eio;
         git-kv = pkgs.ocamlPackages.git-kv;
+        git-net = pkgs.ocamlPackages.git-net;
         http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
