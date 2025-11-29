@@ -49,6 +49,7 @@
         cohttp-eio = pkgs.ocamlPackages.cohttp-eio;
         http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
+        yocaml_eio = pkgs.ocamlPackages.yocaml_eio;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
         yocaml_runtime = pkgs.ocamlPackages.yocaml_runtime;
       });
