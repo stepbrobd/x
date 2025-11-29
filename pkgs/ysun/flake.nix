@@ -55,6 +55,7 @@
           git-kv
           git-net
           http
+          oniguruma
           plist-xml
           yocaml
           yocaml_cmarkit
