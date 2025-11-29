@@ -1,0 +1,11 @@
+(executable
+ (name main)
+ (public_name ysun)
+ (libraries
+  cmarkit
+  hilite
+  yocaml
+  yocaml_jingoo
+  yocaml_markdown
+  yocaml_unix
+  yocaml_yaml))

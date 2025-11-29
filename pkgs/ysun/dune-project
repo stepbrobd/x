@@ -7,3 +7,15 @@
 (license CC-BY-NC-4.0)
 (authors "Yifei Sun <ysun@hey.com>")
 (maintainers "Yifei Sun <ysun@hey.com>")
+
+(package
+  (name ysun)
+  (depends
+    ocaml
+    cmarkit
+    hilite
+    yocaml
+    yocaml_jingoo
+    yocaml_markdown
+    yocaml_unix
+    yocaml_yaml))

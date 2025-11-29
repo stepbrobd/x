@@ -25,12 +25,18 @@
           direnv
           git
           nix-direnv
+          tailwindcss_4
         ] ++ (with ocamlPackages; [
           dune
+          findlib
           ocaml
-          ocamlformat
           ocaml-print-intf
+          ocamlformat
           yocaml
+          yocaml_jingoo
+          yocaml_markdown
+          yocaml_unix
+          yocaml_yaml
         ]);
       };
 
