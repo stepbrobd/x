@@ -52,6 +52,7 @@
           carton-lwt
           cohttp
           cohttp-eio
+          textmate-language
           git-kv
           git-net
           http
