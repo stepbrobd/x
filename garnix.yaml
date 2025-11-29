@@ -2,8 +2,8 @@ builds:
   include:
     - darwinConfigurations.*
     - devShells.*.*
-    - formatter.*
     - nixosConfigurations.*
     - packages.*.*
   exclude:
     - "*.x86_64-darwin.*"
+    - packages.aarch64-linux.spotify
