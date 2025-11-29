@@ -56,6 +56,7 @@
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
         yocaml_eio = pkgs.ocamlPackages.yocaml_eio;
+        yocaml_git = pkgs.ocamlPackages.yocaml_git;
         yocaml_runtime = pkgs.ocamlPackages.yocaml_runtime;
       });
     };
