@@ -1,10 +1,7 @@
 { buildDunePackage
-, alcotest
 , awa-mirage
-, bos
 , ca-certs-nss
 , git-kv
-, gitMinimal
 , h1
 , happy-eyeballs-lwt
 , mimic
@@ -36,16 +33,5 @@ buildDunePackage {
     tls
     tls-mirage
     uri
-  ];
-
-  doCheck = false;
-
-  nativeCheckInputs = [
-    gitMinimal
-  ];
-
-  checkInputs = [
-    alcotest
-    bos
   ];
 }
