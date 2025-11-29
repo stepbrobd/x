@@ -55,6 +55,7 @@
         http = pkgs.ocamlPackages.http;
         yocaml = pkgs.ocamlPackages.yocaml;
         yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
+        yocaml_jingoo = pkgs.ocamlPackages.yocaml_jingoo;
         yocaml_eio = pkgs.ocamlPackages.yocaml_eio;
         yocaml_git = pkgs.ocamlPackages.yocaml_git;
         yocaml_runtime = pkgs.ocamlPackages.yocaml_runtime;
