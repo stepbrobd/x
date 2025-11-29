@@ -45,20 +45,29 @@
 
       packages = lib.fix (self: {
         default = self.cohttp-eio;
-        carton = pkgs.ocamlPackages.carton;
-        carton-git-lwt = pkgs.ocamlPackages.carton-git-lwt;
-        carton-lwt = pkgs.ocamlPackages.carton-lwt;
-        cohttp = pkgs.ocamlPackages.cohttp;
-        cohttp-eio = pkgs.ocamlPackages.cohttp-eio;
-        git-kv = pkgs.ocamlPackages.git-kv;
-        git-net = pkgs.ocamlPackages.git-net;
-        http = pkgs.ocamlPackages.http;
-        yocaml = pkgs.ocamlPackages.yocaml;
-        yocaml_cmarkit = pkgs.ocamlPackages.yocaml_cmarkit;
-        yocaml_jingoo = pkgs.ocamlPackages.yocaml_jingoo;
-        yocaml_eio = pkgs.ocamlPackages.yocaml_eio;
-        yocaml_git = pkgs.ocamlPackages.yocaml_git;
-        yocaml_runtime = pkgs.ocamlPackages.yocaml_runtime;
+
+        inherit (pkgs.ocamlPackages)
+          carton
+          carton-git-lwt
+          carton-lwt
+          cohttp
+          cohttp-eio
+          git-kv
+          git-net
+          http
+          yocaml
+          yocaml_cmarkit
+          yocaml_eio
+          yocaml_git
+          yocaml_jingoo
+          yocaml_liquid
+          yocaml_markdown
+          yocaml_mustache
+          yocaml_omd
+          yocaml_otoml
+          yocaml_runtime
+          yocaml_syndication
+          ;
       });
     };
   };
