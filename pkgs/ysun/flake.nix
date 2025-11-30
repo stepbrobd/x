@@ -33,7 +33,7 @@
           ocaml-print-intf
           ocamlformat
           yocaml
-          yocaml_jingoo
+          yocaml_liquid
           yocaml_markdown
           yocaml_unix
           yocaml_yaml

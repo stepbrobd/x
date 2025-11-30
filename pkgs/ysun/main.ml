@@ -42,12 +42,9 @@ let () =
       track_binary
       >>> Yocaml_yaml.Pipeline.read_file_with_metadata (module Archetype.Page) source
       >>> Yocaml_markdown.Pipeline.With_metadata.make ()
-      >>> Yocaml_jingoo.Pipeline.as_template
+      >>> Yocaml_liquid.Pipeline.as_template
             (module Archetype.Page)
-            Path.(layout / "page.html")
-      >>> Yocaml_jingoo.Pipeline.as_template
-            (module Archetype.Page)
-            Path.(layout / "main.html")
+            Path.(layout / "main.liquid")
       |> Task.map snd
     in
     Action.Static.write_file page_path pipeline
