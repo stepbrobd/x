@@ -20,23 +20,12 @@
       };
 
       devShells.default = pkgs.mkShell {
+        inputsFrom = [ self.packages.${system}.default ];
         packages = with pkgs; [
           deno
-          direnv
-          git
-          nix-direnv
-          tailwindcss_4
         ] ++ (with ocamlPackages; [
-          dune
-          findlib
-          ocaml
           ocaml-print-intf
           ocamlformat
-          yocaml
-          yocaml_liquid
-          yocaml_markdown
-          yocaml_unix
-          yocaml_yaml
         ]);
       };
 
@@ -51,7 +40,7 @@
           (attrNames (builtins.readDir ./pkgs))
           (name: pkgs.ocamlPackages.${name}))
         //
-        { default = self.cohttp-eio; }
+        { default = self.ysun; }
       ));
     };
   };
