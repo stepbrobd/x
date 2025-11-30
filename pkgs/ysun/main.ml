@@ -44,6 +44,9 @@ let () =
       >>> Yocaml_markdown.Pipeline.With_metadata.make ()
       >>> Yocaml_liquid.Pipeline.as_template
             (module Archetype.Page)
+            Path.(layout / "page.liquid")
+      >>> Yocaml_liquid.Pipeline.as_template
+            (module Archetype.Page)
             Path.(layout / "main.liquid")
       |> Task.map snd
     in
