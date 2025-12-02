@@ -9,4 +9,9 @@
 (authors "Yifei Sun <ysun@hey.com>")
 (maintainers "Yifei Sun <ysun@hey.com>")
 
-(package (name aoc))
+(package
+  (name aoc)
+  (depends
+    rocq-core
+    rocq-runtime
+    rocq-stdlib))

@@ -2,43 +2,92 @@
   outputs = inputs: inputs.parts.lib.mkFlake { inherit inputs; } {
     systems = import inputs.systems;
 
-    perSystem = { pkgs, system, ... }: {
+    perSystem = { lib, pkgs, system, self', ... }: {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         overlays = [
-          (final: prev: {
-            dune = prev.dune_3.overrideAttrs {
-              version = "3.20.3-unstable-2025-12-02";
-              src = prev.fetchFromGitHub {
-                owner = "ocaml";
-                repo = "dune";
-                rev = "7c53739170c4131e3ca58ca522b02174db59d2da";
-                hash = "sha256-VCpR0VCHxDgK5ScXAT/hdgkbsLsg9swTjzOx4Pt6Jqw=";
+          (final: prev: lib.fix (self:
+            let
+              ocamlPackages = prev.ocaml-ng.ocamlPackages_5_3;
+              coqPackages = prev.coqPackages_9_1;
+              rocqPackages = prev.rocqPackages_9_1;
+            in
+            {
+              dune = self.dune_3;
+              dune_3 = prev.dune_3.overrideAttrs {
+                version = "3.20.3-unstable-2025-12-02";
+                src = prev.fetchFromGitHub {
+                  owner = "ocaml";
+                  repo = "dune";
+                  rev = "7c53739170c4131e3ca58ca522b02174db59d2da";
+                  hash = "sha256-VCpR0VCHxDgK5ScXAT/hdgkbsLsg9swTjzOx4Pt6Jqw=";
+                };
               };
-            };
-            rocq = prev.rocq-core_9_1.override {
-              customOCamlPackages = prev.ocamlPackages;
-            };
-          })
+              ocamlPackages = ocamlPackages.overrideScope (ocamlFinal: ocamlPrev: {
+                buildDunePackage = ocamlPrev.buildDunePackage.override {
+                  dune_3 = final.dune;
+                };
+              });
+              coqPackages = coqPackages.overrideScope (coqFinal: coqPrev: {
+                coq = coqPrev.coq.override {
+                  buildIde = false;
+                  customOCamlPackages = final.ocamlPackages;
+                  rocqPackages = final.rocqPackages;
+                };
+              });
+              rocqPackages = rocqPackages.overrideScope (rocqFinal: rocqPrev: {
+                rocq-core = rocqPrev.rocq-core.override {
+                  customOCamlPackages = final.ocamlPackages;
+                };
+                stdlib = final.ocamlPackages.buildDunePackage {
+                  pname = "rocq-stdlib";
+                  inherit (rocqPrev.stdlib) version src;
+                  nativeBuildInputs = [ final.coqPackages.coq ];
+                  buildInputs = [ final.rocqPackages.rocq-core ];
+                };
+              });
+            }))
         ];
       };
 
       devShells.default = pkgs.mkShell {
-        packages = with pkgs; [
-          dune
-          ocaml
+        inputsFrom = [ self'.packages.default ];
+        packages = with pkgs.ocamlPackages; [
           ocamlformat
-          rocq
-          sops
-        ] ++ (with ocamlPackages; [
           utop
-        ]);
+        ];
       };
 
       formatter = pkgs.writeShellScriptBin "formatter" ''
-        ${pkgs.dune}/bin/dune fmt
-        ${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt .
+        ${lib.getExe pkgs.dune} fmt
+        ${lib.getExe pkgs.nixpkgs-fmt} .
       '';
+
+      packages.default = pkgs.ocamlPackages.buildDunePackage {
+        pname = "aoc";
+        version = with lib; pipe ./dune-project [
+          readFile
+          (match ".*\\(version ([^\n]+)\\).*")
+          head
+        ];
+
+        src = with lib.fileset; toSource {
+          root = ./.;
+          fileset = unions [
+            ./dune
+            ./dune-project
+          ];
+        };
+
+        nativeBuildInputs = with pkgs; [
+          rocqPackages.rocq-core
+        ];
+
+        propagatedBuildInputs = with pkgs; [
+          rocqPackages.rocq-core
+          rocqPackages.stdlib
+        ];
+      };
     };
   };
 
