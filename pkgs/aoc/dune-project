@@ -1,0 +1,12 @@
+(lang dune 3.21)
+(using rocq 0.11)
+(generate_opam_files false)
+
+(name aoc)
+(version 2025.1202.0)
+(source (uri https://github.com/stepbrobd/x/tree/master/pkgs/aoc))
+(license MIT)
+(authors "Yifei Sun <ysun@hey.com>")
+(maintainers "Yifei Sun <ysun@hey.com>")
+
+(package (name aoc))
