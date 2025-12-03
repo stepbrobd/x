@@ -1,0 +1,12 @@
+(include_subdirs no)
+
+(rocq.extraction
+ (prelude prelude)
+ (theories AoC Stdlib)
+ (flags
+  (-output-directory "."))
+ (extracted_modules Y2025_D1_P1))
+
+(library
+ (name AoC)
+ (modules Y2025_D1_P1))
