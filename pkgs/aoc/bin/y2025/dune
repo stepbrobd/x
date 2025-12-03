@@ -1,0 +1,6 @@
+(rocq.extraction
+ (prelude prelude)
+ (extracted_modules D1P1)
+ (theories aoc Stdlib)
+ (flags
+  (-output-directory ".")))
