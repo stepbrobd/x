@@ -8,14 +8,15 @@
         overlays = [
           (final: prev: lib.fix (self:
             let
-              ocamlPackages = prev.ocaml-ng.ocamlPackages_5_3;
+              ocamlPackages = prev.ocaml-ng.ocamlPackages_5_4;
               coqPackages = prev.coqPackages_9_1;
               rocqPackages = prev.rocqPackages_9_1;
             in
             {
+              coqfmt = final.coqPackages_8_20.coqfmt;
               dune = self.dune_3;
               dune_3 = prev.dune_3.overrideAttrs {
-                version = "3.20.3-unstable-2025-12-02";
+                version = "3.21.0-unstable-2025-12-02";
                 src = prev.fetchFromGitHub {
                   owner = "ocaml";
                   repo = "dune";
@@ -51,8 +52,10 @@
       };
 
       devShells.default = pkgs.mkShell {
+        inherit (self'.packages.default) env;
         inputsFrom = [ self'.packages.default ];
-        packages = with pkgs.ocamlPackages; [
+        packages = with pkgs; with ocamlPackages; [
+          coqfmt
           ocamlformat
           utop
         ];
@@ -63,7 +66,7 @@
         ${lib.getExe pkgs.nixpkgs-fmt} .
       '';
 
-      packages.default = pkgs.ocamlPackages.buildDunePackage {
+      packages.default = pkgs.ocamlPackages.buildDunePackage (finalAttrs: {
         pname = "aoc";
         version = with lib; pipe ./dune-project [
           readFile
@@ -71,11 +74,22 @@
           head
         ];
 
+        env = rec {
+          COQPATH = lib.concatStringsSep ":" (map
+            (p: (lib.concatStringsSep ":" [
+              "${p}/lib/coq/user-contrib/"
+              "${p}/lib/coq/${pkgs.coqPackages.coq.coq-version}/user-contrib/"
+              "${p}/lib/ocaml/${pkgs.ocamlPackages.ocaml.version}/site-lib/coq/user-contrib/"
+            ]))
+            finalAttrs.propagatedBuildInputs);
+          ROCQPATH = COQPATH;
+        };
+
         src = with lib.fileset; toSource {
           root = ./.;
           fileset = unions [
-            ./dune
             ./dune-project
+            ./src
           ];
         };
 
@@ -87,7 +101,9 @@
           rocqPackages.rocq-core
           rocqPackages.stdlib
         ];
-      };
+
+        passthru = { inherit (finalAttrs) env; };
+      });
     };
   };
 
