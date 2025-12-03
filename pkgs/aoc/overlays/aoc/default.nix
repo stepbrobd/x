@@ -26,8 +26,9 @@ pkgs.ocamlPackages.buildDunePackage (finalAttrs: {
   src = with lib.fileset; toSource {
     root = ../../.;
     fileset = unions [
-      ../../dune-project
+      ../../bin
       ../../theories
+      ../../dune-project
     ];
   };
 
