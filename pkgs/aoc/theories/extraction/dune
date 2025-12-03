@@ -4,6 +4,7 @@
  (prelude prelude)
  (theories AoC Stdlib)
  (flags
+  :standard
   (-output-directory "."))
  (extracted_modules Y2025_D1_P1))
 
