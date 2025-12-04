@@ -1,5 +1,15 @@
 (include_subdirs no)
 
+(rule
+ (target modules.inc)
+ (deps
+  (file prelude.v))
+ (action
+  (with-stdout-to
+   modules.inc
+   (system
+    "awk -F'\"' '/Extraction/ {gsub(/\\.ml$/, \"\", $2); printf \"%s \", $2} END {print \"\"}' %{deps}"))))
+
 (rocq.extraction
  (prelude prelude)
  (theories AoC Stdlib)
