@@ -1,6 +1,4 @@
-{ stdenv
-, inputs
-}:
+{ inputs, stdenv }:
 
 # pull caddy from `inputs` directly to prevent infinite recursion
 # as `caddy.withPlugins` is implemented with override

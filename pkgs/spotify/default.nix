@@ -1,7 +1,11 @@
-{ stdenv
-, spotify
+{ pkgs
+, pkgsPrev ? pkgs
+, stdenv
 }:
 
+let
+  inherit (pkgsPrev) spotify;
+in
 if stdenv.hostPlatform.isDarwin
 then
   spotify.overrideAttrs

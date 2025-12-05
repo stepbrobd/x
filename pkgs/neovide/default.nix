@@ -1,7 +1,11 @@
-{ stdenv
-, neovide
+{ pkgs
+, pkgsPrev ? pkgs
+, stdenv
 }:
 
+let
+  inherit (pkgsPrev) neovide;
+in
 if stdenv.hostPlatform.isDarwin
 then
   neovide.overrideAttrs

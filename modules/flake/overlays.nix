@@ -13,7 +13,7 @@ in
           name:
           importPackagesWith
             (
-              pkgsPrev
+              pkgsFinal
               // {
                 inherit
                   inputs

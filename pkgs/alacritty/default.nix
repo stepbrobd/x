@@ -1,7 +1,11 @@
-{ stdenv
-, alacritty
+{ pkgs
+, pkgsPrev ? pkgs
+, stdenv
 }:
 
+let
+  inherit (pkgsPrev) alacritty;
+in
 if stdenv.hostPlatform.isDarwin
 then
   alacritty.overrideAttrs
