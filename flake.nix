@@ -125,7 +125,6 @@
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
     nixvim.inputs.flake-parts.follows = "parts";
     nixvim.inputs.systems.follows = "systems";
-    nixvim.inputs.nuschtosSearch.follows = "";
     # p
     parts.url = "github:hercules-ci/flake-parts";
     parts.inputs.nixpkgs-lib.follows = "nixpkgs";
