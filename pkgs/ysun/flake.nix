@@ -26,6 +26,7 @@
         ] ++ (with ocamlPackages; [
           ocaml-print-intf
           ocamlformat
+          utop
         ]);
       };
 
