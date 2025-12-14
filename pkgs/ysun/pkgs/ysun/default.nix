@@ -1,5 +1,6 @@
 { lib
 , buildDunePackage
+, deno
 , tailwindcss_4
 , yocaml
 , yocaml_liquid
@@ -29,22 +30,8 @@ buildDunePackage (finalAttrs: {
 
   env.DUNE_CACHE = "disabled";
 
-  buildPhase = ''
-    runHook preBuild
-    dune build -p ${finalAttrs.pname} ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
-    dune exec ./main.exe
-    runHook postBuild
-  '';
-
-  installPhase = ''
-    runHook preInstall
-    dune install --prefix $out --libdir $OCAMLFIND_DESTDIR ${finalAttrs.pname}
-    mkdir -p $out/var/www/html
-    cp -r _build/www/* $out/var/www/html/
-    runHook postInstall
-  '';
-
   nativeBuildInputs = [
+    deno
     tailwindcss_4
   ];
 
@@ -55,4 +42,20 @@ buildDunePackage (finalAttrs: {
     yocaml_unix
     yocaml_yaml
   ];
+
+  buildPhase = ''
+    runHook preBuild
+    dune build -p ${finalAttrs.pname} ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
+    dune exec ./main.exe
+    deno fmt _build/www
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    dune install --prefix $out --libdir $OCAMLFIND_DESTDIR ${finalAttrs.pname}
+    mkdir -p $out/var/www/html
+    cp -r _build/www/* $out/var/www/html/
+    runHook postInstall
+  '';
 })
