@@ -24,3 +24,7 @@ jobs:
             substituters = https://cache.garnix.io https://cache.nixos.org/
       - name: "Bump"
         uses: "gepbird/nix-update-action@v2"
+        with:
+          pr-reviewers: stepbrobd
+          packages: "check-if-email-exists,migrate-matrix,nu_plugin_dns"
+          blacklist: "alacritty,aoc,caddy,hydra,jitsi-meet,miroir,neovide,nixvim,nixwffe,pixelmplus,san-francisco,spotify,treesitter-coq-grammar,yeh,ysun"
