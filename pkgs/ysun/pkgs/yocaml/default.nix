@@ -11,13 +11,13 @@
 
 buildDunePackage (finalAttrs: {
   pname = "yocaml";
-  version = "2.7.0";
+  version = "2.8.0";
 
   src = fetchFromGitHub {
     owner = "xhtmlboi";
     repo = "yocaml";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-x9LyipIXN5qoWtmZNcOh8i+WERcrWqydAnxAWdAHXdA=";
+    hash = "sha256-wuKPv9bFV2DEV5KwfZxnYavtqaCs8OO/iKI2F3qF+4w=";
   };
 
   env.DUNE_CACHE = "disabled";
