@@ -31,7 +31,6 @@
               golink.overlays.default
               mac-style-plymouth.overlays.default
               rust-overlay.overlays.default
-              unstraightened.overlays.default
             ];
             instances = {
               pkgs = inputs.nixpkgs;
@@ -73,8 +72,6 @@
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    # f
-    flakey-profile.url = "github:lf-/flakey-profile";
     # g
     garnix.url = "github:garnix-io/garnix-lib";
     garnix.inputs.nixpkgs.follows = "nixpkgs";
@@ -94,20 +91,15 @@
     hardware.url = "github:nixos/nixos-hardware";
     hm.url = "github:nix-community/home-manager";
     hm.inputs.nixpkgs.follows = "nixpkgs";
-    hydra.url = "github:ners/hydra/oidc";
-    hydra.inputs.nixpkgs.follows = "nixpkgs";
     # i
-    impermanence.url = "github:nix-community/impermanence";
     index.url = "github:nix-community/nix-index-database";
     index.inputs.nixpkgs.follows = "nixpkgs";
     # l
-    lanzaboote.url = "github:nix-community/lanzaboote/v0.4.3";
+    lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     lanzaboote.inputs.crane.follows = "crane";
-    lanzaboote.inputs.flake-compat.follows = "compat";
-    lanzaboote.inputs.flake-parts.follows = "parts";
-    lanzaboote.inputs.pre-commit-hooks-nix.follows = "";
     lanzaboote.inputs.rust-overlay.follows = "rust-overlay";
+    lanzaboote.inputs.pre-commit.follows = "";
     # m
     mac-style-plymouth.url = "github:sergioribera/s4rchiso-plymouth-theme";
     mac-style-plymouth.inputs.nixpkgs.follows = "nixpkgs";
@@ -147,9 +139,6 @@
     tsnsrv.inputs.nixpkgs.follows = "nixpkgs";
     tsnsrv.inputs.flake-parts.follows = "parts";
     # u
-    unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
-    unstraightened.inputs.nixpkgs.follows = "nixpkgs";
-    unstraightened.inputs.systems.follows = "systems";
     utils.url = "github:numtide/flake-utils";
     utils.inputs.systems.follows = "systems";
   };
