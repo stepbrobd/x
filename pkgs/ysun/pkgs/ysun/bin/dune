@@ -1,0 +1,4 @@
+(executable
+ (name ysun)
+ (public_name ysun)
+ (libraries cmdliner dune-build-info yocaml yocaml_eio ysun))

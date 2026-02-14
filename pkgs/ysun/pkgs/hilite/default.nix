@@ -1,5 +1,5 @@
-{ buildDunePackage
-, fetchFromGitHub
+{ lib
+, buildDunePackage
 , cmarkit
 , mdx
 , textmate-language
@@ -7,13 +7,21 @@
 
 buildDunePackage (finalAttrs: {
   pname = "hilite";
-  version = "0.5.0";
+  version = with lib; pipe ./dune-project [
+    readFile
+    (match ".*\\(version ([^\n]+)\\).*")
+    head
+  ];
 
-  src = fetchFromGitHub {
-    owner = "patricoferris";
-    repo = "hilite";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-RgK6FxUc4+OOHQdKfb+mwk4DZcHEIdZsd+6ItcfAoys=";
+  src = with lib.fileset; toSource {
+    root = ./.;
+    fileset = unions [
+      ./src
+      ./test
+      ./dune
+      ./dune-project
+      ./license.txt
+    ];
   };
 
   env.DUNE_CACHE = "disabled";

@@ -1,11 +1,3 @@
-(executable
- (name main)
- (public_name ysun)
- (libraries
-  cmarkit
-  hilite
-  yocaml
-  yocaml_liquid
-  yocaml_markdown
-  yocaml_unix
-  yocaml_yaml))
+(subdir
+ pkgs
+ (data_only_dirs hilite omd))

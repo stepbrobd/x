@@ -1,5 +1,5 @@
 { buildDunePackage
-, fetchFromGitHub
+, fetchzip
 , bstr
 , cachet
 , checkseum
@@ -12,13 +12,11 @@
 
 buildDunePackage (finalAttrs: {
   pname = "carton";
-  version = "1.1.0";
+  version = "1.2.0";
 
-  src = fetchFromGitHub {
-    owner = "robur-coop";
-    repo = "carton";
-    tag = finalAttrs.version;
-    hash = "sha256-IBmiXKwzw7nNuPO6MLoUuYBfTi0LBZPRDsSbragJQYs=";
+  src = fetchzip {
+    url = "https://github.com/robur-coop/carton/releases/download/${finalAttrs.version}/carton-${finalAttrs.version}.tbz";
+    hash = "sha256-W+S/ICD7vHRQOb0dNEI6SZbBW4QJQs46ARxWf1WZ6Ps=";
   };
 
   env.DUNE_CACHE = "disabled";

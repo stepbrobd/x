@@ -11,16 +11,20 @@
       src="https://stats.ysun.co/js/script.file-downloads.hash.outbound-links.js"
     ></script>
     <title>{{ title }}</title>
+    {% for meta in metas %}
+    <meta {{ meta.attr }}="{{ meta.name }}" content="{{ meta.content }}">
+    {% endfor %}
   </head>
   <body class="flex flex-col min-h-screen p-4 gap-8">
+    {% include "assets/layout/webring" %}
     <div class="prose container mx-auto">
-      {% render "assets/layout/header" %}
+      {% include "assets/layout/header" %}
     </div>
     <main class="prose flex-grow container mx-auto">
-      {{ yocaml_body }}
+      {{ content }}
     </main>
     <div class="prose container mx-auto">
-      {% render "assets/layout/footer" %}
+      {% include "assets/layout/footer" %}
     </div>
   </body>
 </html>

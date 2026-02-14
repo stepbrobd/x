@@ -1,7 +1,7 @@
 ---
 date: 2024-05-25
-external: https://codeberg.org/stepbrobd
+redirect: https://codeberg.org/stepbrobd
 hidden: true
-layout: redirect.vto
+layout: redirect
 title: Codeberg
 ---

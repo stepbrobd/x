@@ -1,17 +1,20 @@
 { lib
 , buildDunePackage
-, deno
+, cmdliner
+, dune-build-info
+, minhtml
 , tailwindcss_4
 , yocaml
+, yocaml_eio
 , yocaml_liquid
-, yocaml_markdown
-, yocaml_unix
+, yocaml_omd
+, yocaml_syndication
 , yocaml_yaml
 }:
 
 buildDunePackage (finalAttrs: {
   pname = "ysun";
-  version = with lib; pipe ../../dune-project [
+  version = with lib; pipe ./dune-project [
     readFile
     (match ".*\\(version ([^\n]+)\\).*")
     head
@@ -20,42 +23,54 @@ buildDunePackage (finalAttrs: {
   src = with lib.fileset; toSource {
     root = ../../.;
     fileset = unions [
+      # generator
+      ./bin
+      ./lib
+      ./dune-project
+      # site data
       ../../assets
-      ../../dune
-      ../../dune-project
-      ../../main.ml
       ../../pages
+      ../../dune-workspace
     ];
   };
 
   env.DUNE_CACHE = "disabled";
 
   nativeBuildInputs = [
-    deno
+    minhtml
     tailwindcss_4
   ];
 
   buildInputs = [
+    cmdliner
+    dune-build-info
     yocaml
+    yocaml_eio
     yocaml_liquid
-    yocaml_markdown
-    yocaml_unix
+    yocaml_omd
+    yocaml_syndication
     yocaml_yaml
   ];
 
   buildPhase = ''
     runHook preBuild
+
     dune build -p ${finalAttrs.pname} ''${enableParallelBuilding:+-j $NIX_BUILD_CORES}
-    dune exec ./main.exe
-    deno fmt _build/www
+    dune exec pkgs/ysun/bin/ysun.exe -- build
+
     runHook postBuild
   '';
 
   installPhase = ''
     runHook preInstall
+
     dune install --prefix $out --libdir $OCAMLFIND_DESTDIR ${finalAttrs.pname}
+
+    rm outputs/cache
+    (shopt -s globstar; minhtml --minify-css --minify-js outputs/**/*.html)
     mkdir -p $out/var/www/html
-    cp -r _build/www/* $out/var/www/html/
+    cp -r outputs/* $out/var/www/html/
+
     runHook postInstall
   '';
 })

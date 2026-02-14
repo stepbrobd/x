@@ -3,13 +3,13 @@ date: 2025-08-07
 description: You are blocked by Cloudflare Web Application Firewall (WAF)
 title: You've been WAFed
 hidden: true
-layout: error/waf.vto
+layout: error/waf
 ---
 
 # You've been WAFed
 
-You must've done something really sketchy stuff to get here... Holy cow (or not)
-is here to cleanse your soul:
+You must've done something really sketchy stuff to get here...
+Holy cow (or not) is here to cleanse your soul:
 
 ```shell
 $ nix run nixpkgs#neo-cowsay -- --random pax vobiscum sinner
