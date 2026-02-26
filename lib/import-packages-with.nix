@@ -1,4 +1,4 @@
-{ ... }:
+{ lib }:
 
 # importPackagesWith args
 pkgs: pkg: args:

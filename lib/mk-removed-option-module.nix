@@ -1,7 +1,8 @@
-# vendored from https://github.com/nixos/nixpkgs/pull/398456
+# vendored from https://github.com/NixOS/nixpkgs/pull/398456
 
 { lib }:
 
+with lib;
 /**
   Return a module that causes a warning to be shown if the
   specified option is defined. For example,
@@ -25,16 +26,6 @@
 
   : 2\. Function argument
   */
-let
-  inherit (lib)
-    concatStringsSep
-    getAttrFromPath
-    mkOption
-    setAttrByPath
-    showFiles
-    showOption
-    ;
-in
 optionName: replacementInstructions:
 { options, ... }:
 {

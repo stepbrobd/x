@@ -1,3 +1,3 @@
 { inputs, stdenv }:
 
-(import inputs.compat { src = ./.; }).defaultNix.packages.${stdenv.hostPlatform.system}.default
+(import inputs.compat { src = ./.; }).defaultNix.packages.${stdenv.hostPlatform.system}.miroir
